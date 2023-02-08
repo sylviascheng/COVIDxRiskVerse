@@ -1,0 +1,29 @@
+################################################################################
+################################ LOAD SL #######################################
+################################################################################
+
+loaded_list <- load_model(
+  fit = sl,
+  loss = loss_squared_error,
+  covars = covars,
+  outcome = outcome,
+  data = data,
+  Data_Dictionary = data_dictionary
+)
+
+X <- loaded_list$X
+Y <- loaded_list$Y
+
+subcategories <- loaded_list$Subcategories
+variable_list <- loaded_list$Variable_list
+total_outcome <- loaded_list$total
+
+risk_rescaled <- loaded_list$risk_rescaled
+risk <- loaded_list$risk
+
+load_model_time <- proc.time()
+
+load_model_time - fit_model_time
+
+
+plan(multicore, workers = cpus, gc = TRUE)
