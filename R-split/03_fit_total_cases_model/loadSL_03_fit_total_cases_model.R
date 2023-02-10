@@ -1,8 +1,8 @@
 # create necessary objects
-set.seed(5929922)
+set.seed(5929942)
 
 # set the fit_sl_varimp args
-outcome <- "CountyRelativeDay100Cases"
+outcome <- "TotalCasesUpToDate"
 
 all_outcomes <- c(
   "CountyRelativeDay100Cases",
@@ -12,11 +12,9 @@ all_outcomes <- c(
   "Deathsat1year",
   "Casesat1year"
 )
-label <- "COVID-19 Cases at Day 100"
+label <- "Total COVID-19 Cases To-Date"
 num_boot <- 100
 var_combn <- 2
-
-run_risk <- FALSE
 
 start_time <- proc.time()
 
@@ -48,6 +46,5 @@ risk <- loaded_list$risk
 load_model_time <- proc.time()
 
 load_model_time - fit_model_time
-
 
 plan(multicore, workers = cpus, gc = TRUE)

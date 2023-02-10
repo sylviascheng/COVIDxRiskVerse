@@ -1,6 +1,30 @@
+# create necessary objects 
+set.seed(5929922)
+
+# set the fit_sl_varimp args
+outcome <- "CountyRelativeDay100Deaths"
+
+all_outcomes <- c(
+  "CountyRelativeDay100Cases",
+  "TotalCasesUpToDate",
+  "CountyRelativeDay100Deaths",
+  "TotalDeathsUpToDate",
+  "Deathsat1year",
+  "Casesat1year"
+)
+label <- "COVID-19 Deaths at Day 100"
+num_boot <- 100
+var_combn <- 2
+
+run_risk <- FALSE
+
+start_time <- proc.time()
+
 ################################################################################
 ################################ LOAD SL #######################################
 ################################################################################
+sl <- sl_fit$sl_fit
+covars <- sl_fit$covars
 
 loaded_list <- load_model(
   fit = sl,

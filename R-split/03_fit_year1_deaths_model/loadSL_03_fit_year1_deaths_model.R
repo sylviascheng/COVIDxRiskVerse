@@ -2,7 +2,7 @@
 set.seed(5929922)
 
 # set the fit_sl_varimp args
-outcome <- "CountyRelativeDay100Cases"
+outcome <- "Deathsat1year"
 
 all_outcomes <- c(
   "CountyRelativeDay100Cases",
@@ -12,7 +12,7 @@ all_outcomes <- c(
   "Deathsat1year",
   "Casesat1year"
 )
-label <- "COVID-19 Cases at Day 100"
+label <- "COVID-19 Deaths at 1 Year"
 num_boot <- 100
 var_combn <- 2
 

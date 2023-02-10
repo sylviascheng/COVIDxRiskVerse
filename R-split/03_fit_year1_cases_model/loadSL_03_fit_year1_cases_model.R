@@ -2,7 +2,7 @@
 set.seed(5929922)
 
 # set the fit_sl_varimp args
-outcome <- "CountyRelativeDay100Cases"
+outcome <- "Casesat1year"
 
 all_outcomes <- c(
   "CountyRelativeDay100Cases",
@@ -12,7 +12,7 @@ all_outcomes <- c(
   "Deathsat1year",
   "Casesat1year"
 )
-label <- "COVID-19 Cases at Day 100"
+label <- "COVID-19 Cases at 1 Year"
 num_boot <- 100
 var_combn <- 2
 
@@ -48,6 +48,5 @@ risk <- loaded_list$risk
 load_model_time <- proc.time()
 
 load_model_time - fit_model_time
-
 
 plan(multicore, workers = cpus, gc = TRUE)
