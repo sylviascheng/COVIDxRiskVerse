@@ -1,6 +1,10 @@
-library(here)
+# ATTENTION: MAKE SURE TASK 02 IS DONE BEFORE RUNNING THIS SCRIPT!
+source("../utils_sl_varimp.R")
+source("../util.R")
+source("load_sl.R")
 
-source(here::here("loadSL_03_fit_day100_cases_model.R"))
+# ATTENTION: EDIT THIS BASED ON YOUR DIRECTORY
+var_imp_risk_results <- readRDS("/tmp/sky.qiu/COVIDxrisk/out/" %+% outcome %+% "_ind_var_imp_risk.RDS")
 
 ################################################################################
 ################################## INTXN RISK ##################################
@@ -19,11 +23,7 @@ mips_results <- mips_imp_risk(risk_importance = var_imp_risk_results,
                               p_val_fun = p_val_fun,
                               risk = risk)
 
+# ATTENTION: EDIT THIS BASED ON YOUR DIRECTORY
+saveRDS(mips_results, "/tmp/sky.qiu/COVIDxrisk/out/" %+% outcome %+% "_intxn_imp_risk.RDS")
+
 print("Finished MIPS")
-
-saveRDS(mips_results, here(paste("data/",
-                                 outcome, "_intxn_imp_risk.RDS",
-                                 sep = "")))
-
-print("Finished Risk Sub-Category Importance")
-

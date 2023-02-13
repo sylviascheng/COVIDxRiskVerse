@@ -1,5 +1,11 @@
+# ATTENTION: EDIT THIS BASED ON YOUR DIRECTORY
+sl_fit <- readRDS("/tmp/sky.qiu/COVIDxrisk/Models/CountyRelativeDay100Cases.RDS")
+
 # create necessary objects
 set.seed(5929922)
+
+cpus <- 16
+`%+%` <- function(a, b) paste0(a, b)
 
 # set the fit_sl_varimp args
 outcome <- "CountyRelativeDay100Cases"
@@ -18,7 +24,12 @@ var_combn <- 2
 
 run_risk <- FALSE
 
-start_time <- proc.time()
+## LOAD DATA
+
+load_data_results <- load_data(path_data = "cleaned_covid_data_final.csv",
+                               path_data_dict = "Data_Dictionary.xlsx")
+data <- load_data_results$data
+data_dictionary <- load_data_results$data_dictionary
 
 ################################################################################
 ################################ LOAD SL #######################################
@@ -44,10 +55,5 @@ total_outcome <- loaded_list$total
 
 risk_rescaled <- loaded_list$risk_rescaled
 risk <- loaded_list$risk
-
-load_model_time <- proc.time()
-
-load_model_time - fit_model_time
-
 
 plan(multicore, workers = cpus, gc = TRUE)

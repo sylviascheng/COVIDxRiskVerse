@@ -1,12 +1,15 @@
-library(here)
-source(here::here("loadSL_03_fit_day100_cases_model.R"))
+# ATTENTION: MAKE SURE TASK 05 IS DONE BEFORE RUNNING THIS SCRIPT!
+source("../utils_sl_varimp.R")
+source("../util.R")
+source("load_sl.R")
+
+# ATTENTION: EDIT THIS BASED ON YOUR DIRECTORY
+var_imp_quantile_results <- readRDS("/tmp/sky.qiu/COVIDxrisk/out/" %+% outcome %+% "_ind_var_imp_quantile.RDS")
 
 ################################################################################
 ############################### INTXN QUANTILE #################################
 ################################################################################
-
 gc()
-
 quantile_mips_results <- mips_imp_quantile(quantile_importance = var_imp_quantile_results,
                                            data = data,
                                            outcome = outcome,
@@ -20,7 +23,5 @@ quantile_mips_results <- mips_imp_quantile(quantile_importance = var_imp_quantil
                                            p_val_fun = p_val_fun,
                                            total = total_outcome)
 
-saveRDS(quantile_mips_results, here(paste("data/",
-                                          outcome,
-                                          "_intxn_imp_quantile.RDS",
-                                          sep = "")))
+# ATTENTION: EDIT THIS BASED ON YOUR DIRECTORY
+saveRDS(quantile_mips_results, "/tmp/sky.qiu/COVIDxrisk/out/" %+% outcome %+% "_intxn_imp_quantile.RDS")

@@ -1,6 +1,6 @@
-library(here)
-
-source(here::here("loadSL_03_fit_day100_cases_model.R"))
+source("../utils_sl_varimp.R")
+source("../util.R")
+source("load_sl.R")
 
 ################################################################################
 ######################### SUBCAT IMP RISK ######################################
@@ -16,10 +16,7 @@ subcat_imp_risk_results <- subcat_imp_risk(
   num_boot = num_boot,
   variable_list = variable_list)
 
-subcat_imp_risk_time <- proc.time()
+# ATTENTION: EDIT THIS BASED ON YOUR DIRECTORY
+saveRDS(subcat_imp_risk_results, "/tmp/sky.qiu/COVIDxrisk/out/" %+% outcome %+% "_subgroup_imp_risk.RDS")
 
-saveRDS(subcat_imp_risk_results, here(paste("data/",
-                                            outcome,
-                                            "_subgroup_imp_risk.RDS",
-                                            sep = "")))
-#
+print("Finished Subgroup Risk Variable Importance")

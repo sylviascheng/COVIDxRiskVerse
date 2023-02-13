@@ -1,11 +1,11 @@
-library(here)
-
-source(here::here("loadSL_03_fit_day100_cases_model.R"))
+source("../utils_sl_varimp.R")
+source("../util.R")
+source("load_sl.R")
 
 ################################################################################
 ############################### VAR IMP QUANTILE ###############################
 ################################################################################
-
+gc()
 var_imp_quantile_results <- var_imp_quantile(X = X,
                                              data = data,
                                              outcome = outcome,
@@ -17,12 +17,9 @@ var_imp_quantile_results <- var_imp_quantile(X = X,
                                              total,
                                              Data_Dictionary = data_dictionary,
                                              total = total_outcome,
-                                             p_val_fun = p_val_fun
-)
+                                             p_val_fun = p_val_fun)
 
-saveRDS(var_imp_quantile_results, here(paste("data/",
-                                             outcome,
-                                             "_ind_var_imp_quantile.RDS",
-                                             sep = "")))
+# ATTENTION: EDIT THIS BASED ON YOUR DIRECTORY
+saveRDS(var_imp_quantile_results, "/tmp/sky.qiu/COVIDxrisk/out/" %+% outcome %+% "_ind_var_imp_quantile.RDS")
 
 print("Finished Quantile-Based Variable Importance")

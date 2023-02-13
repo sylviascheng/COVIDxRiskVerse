@@ -1,12 +1,11 @@
-library(here)
-source(here::here("loadSL_03_fit_day100_cases_model.R"))
+source("../utils_sl_varimp.R")
+source("../util.R")
+source("load_sl.R")
 
 ################################################################################
 ############################# SUBCAT IMP QUANTILE ##############################
 ################################################################################
-
 gc()
-
 subcat_imp_quantile_results <- subcat_imp_quantile(subcategories,
                                                    data = data,
                                                    outcome = outcome,
@@ -19,10 +18,7 @@ subcat_imp_quantile_results <- subcat_imp_quantile(subcategories,
                                                    Data_Dictionary = data_dictionary,
                                                    p_val_fun = p_val_fun)
 
+# ATTENTION: EDIT THIS BASED ON YOUR DIRECTORY
+saveRDS(subcat_imp_quantile_results, "/tmp/sky.qiu/COVIDxrisk/out/" %+% outcome %+% "_subgroup_imp_quant.RDS")
+
 print("Finished Sub-Category Quantile Importance")
-
-saveRDS(subcat_imp_quantile_results, here(paste("data/",
-                                                outcome,
-                                                "_subgroup_imp_quant.RDS",
-                                                sep = "")))
-

@@ -1,6 +1,6 @@
-library(here)
-
-source(here::here("loadSL_03_fit_day100_cases_model.R"))
+source("../utils_sl_varimp.R")
+source("../util.R")
+source("load_sl.R")
 
 ################################################################################
 ############################ VAR IMP RISK ######################################
@@ -16,13 +16,9 @@ var_imp_risk_results <- var_imp_risk(X = X,
                                      num_boot = num_boot,
                                      Data_Dictionary = data_dictionary)
 
-variable_imp_risk_time <- proc.time()
-
 var_imp_risk_results$Label <- data_dictionary$`Nice Label`[match(var_imp_risk_results$Variable, data_dictionary$`Variable Name`)]
 
-saveRDS(var_imp_risk_results, here(paste("data/",
-                                         outcome,
-                                         "_ind_var_imp_risk.RDS",
-                                         sep = "")))
+# ATTENTION: EDIT THIS BASED ON YOUR DIRECTORY
+saveRDS(var_imp_risk_results, "/tmp/sky.qiu/COVIDxrisk/out/" %+% outcome %+% "_ind_var_imp_risk.RDS")
 
 print("Finished Risk Variable Importance")
