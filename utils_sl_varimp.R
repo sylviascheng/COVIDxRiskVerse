@@ -124,7 +124,7 @@ load_model <- function(fit,
   dat <- task$data
   X <- task$nodes$covariates
   Y <- task$Y
-  preds <- fit$predict_fold(task, fold_number = "validation")
+  preds <- fit$predict_fold(task, fold_number = "full")
   risk <- mean(loss(preds, Y))
   risk_rescaled <- mean(sqrt((Y - preds)^2) * dat$Population)
   total <- sum(dat[[outcome]] * dat$Population)
@@ -188,8 +188,8 @@ var_imp_risk <- function(X,
         covariates = covars
       )
       
-      resampled_sl_preds <- fit$predict_fold(task_no_perm, fold_number = "validation")
-      resampled_perm_sl_preds <- fit$predict_fold(task_perm, fold_number = "validation")
+      resampled_sl_preds <- fit$predict_fold(task_no_perm, fold_number = "full")
+      resampled_perm_sl_preds <- fit$predict_fold(task_perm, fold_number = "full")
       
       varimp_metric <- mean(loss(resampled_perm_sl_preds, Y)) / mean(loss(resampled_sl_preds, Y))
       
@@ -265,8 +265,8 @@ subcat_imp_risk <- function(subcategories,
         covariates = covars
       )
       
-      resampled_sl_preds <- fit$predict_fold(task_no_perm, fold_number = "validation")
-      resampled_perm_sl_preds <- fit$predict_fold(task_perm, fold_number = "validation")
+      resampled_sl_preds <- fit$predict_fold(task_no_perm, fold_number = "full")
+      resampled_perm_sl_preds <- fit$predict_fold(task_perm, fold_number = "full")
       
       varimp_metric <- mean(loss(resampled_perm_sl_preds, Y)) / mean(loss(resampled_sl_preds, Y))
       
@@ -551,7 +551,7 @@ mips_imp_risk <- function(risk_importance,
         covariates = covars
       )
       
-      resampled_perm_sl_preds <- fit$predict_fold(task_perm, fold_number = "validation")
+      resampled_perm_sl_preds <- fit$predict_fold(task_perm, fold_number = "full")
       
       risk_scrambled <- mean(loss(resampled_perm_sl_preds, Y))
       varimp_metric <- risk_scrambled / risk
